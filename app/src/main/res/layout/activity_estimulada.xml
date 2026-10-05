@@ -30,34 +30,49 @@
             android:layout_height="wrap_content">
 
             <RadioButton
+                android:id="@+id/rbLulaMolusco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/cand_lula_molusco"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
+                android:text="Lula Molusco" />
+
+            <RadioButton
+                android:id="@+id/rbNiko"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/cand_niko"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
+                android:text="Niko (OneShot)" />
+
+            <RadioButton
+                android:id="@+id/rbV1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/cand_v1"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
+                android:text="V1 (ULTRAKILL)" />
+
+            <RadioButton
                 android:id="@+id/rbAnakin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/cand_anakin"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
                 android:text="Anakin Skywalker" />
 
             <RadioButton
-                android:id="@+id/rbLeia"
+                android:id="@+id/rbLuladroid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Leia Organa" />
-
-            <RadioButton
-                android:id="@+id/rbHan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Han Solo" />
-
-            <RadioButton
-                android:id="@+id/rbChewbacca"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chewbacca" />
-
-            <RadioButton
-                android:id="@+id/rbR2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="R2-D2" />
+                android:drawableEnd="@drawable/cand_luladroid"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
+                android:text="LulaDroid" />
 
         </RadioGroup>
 

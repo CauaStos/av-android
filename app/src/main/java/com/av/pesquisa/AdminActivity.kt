@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -17,11 +18,11 @@ import android.widget.Toast
 class AdminActivity : Activity() {
 
     private val candidatos = listOf(
-        "Anakin Skywalker",
-        "Leia Organa",
-        "Han Solo",
-        "Chewbacca",
-        "R2-D2"
+        "Lula Molusco" to R.drawable.cand_lula_molusco,
+        "Niko (OneShot)" to R.drawable.cand_niko,
+        "V1 (ULTRAKILL)" to R.drawable.cand_v1,
+        "Anakin Skywalker" to R.drawable.cand_anakin,
+        "LulaDroid" to R.drawable.cand_luladroid
     )
 
     private val problemas = listOf(
@@ -50,7 +51,9 @@ class AdminActivity : Activity() {
         textoResumo.text = "Total de entrevistas: $total"
 
         if (total > 0) {
-            val lider = candidatos.map { it to banco.contarVotos(it) }.maxByOrNull { it.second }
+            val lider = candidatos
+                .map { (nome, _) -> nome to banco.contarVotos(nome) }
+                .maxByOrNull { it.second }
             if (lider != null && lider.second > 0) {
                 val percentualLider = lider.second * 100 / total
                 textoResumo.text = "Total de entrevistas: $total\n" +
@@ -70,10 +73,10 @@ class AdminActivity : Activity() {
         val caixaCandidatos = findViewById<LinearLayout>(R.id.caixaCandidatos)
         val caixaProblemas = findViewById<LinearLayout>(R.id.caixaProblemas)
 
-        for (candidato in candidatos) {
+        for ((candidato, foto) in candidatos) {
             val votos = banco.contarVotos(candidato)
             val porcentagem = if (total > 0) votos * 100 / total else 0
-            val linha = criarBarra(candidato, votos, porcentagem)
+            val linha = criarBarra(candidato, votos, porcentagem, foto)
             caixaCandidatos.addView(linha)
             linhasBarras.add(candidato to linha)
         }
@@ -151,7 +154,7 @@ class AdminActivity : Activity() {
         return texto
     }
 
-    private fun criarBarra(rotulo: String, valor: Int, porcentagem: Int): LinearLayout {
+    private fun criarBarra(rotulo: String, valor: Int, porcentagem: Int, foto: Int? = null): LinearLayout {
         val densidade = resources.displayMetrics.density
         val alturaBarra = (20 * densidade).toInt()
 
@@ -159,6 +162,16 @@ class AdminActivity : Activity() {
         linha.orientation = LinearLayout.HORIZONTAL
         linha.gravity = Gravity.CENTER_VERTICAL
         linha.setPadding(0, (6 * densidade).toInt(), 0, (6 * densidade).toInt())
+
+        if (foto != null) {
+            val miniatura = ImageView(this)
+            miniatura.setImageResource(foto)
+            miniatura.layoutParams = LinearLayout.LayoutParams(
+                (32 * densidade).toInt(),
+                (32 * densidade).toInt()
+            ).apply { setMargins(0, 0, (6 * densidade).toInt(), 0) }
+            linha.addView(miniatura)
+        }
 
         val textoRotulo = TextView(this)
         textoRotulo.text = "$rotulo ($valor)"
