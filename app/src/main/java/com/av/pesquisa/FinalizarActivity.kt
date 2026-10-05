@@ -80,7 +80,7 @@ class FinalizarActivity : Activity() {
         }
     }
 
-    private fun salvarPesquisa(nome: String, celular: String) {
+    private fun salvarPesquisa(nome: String, celular: String, end_task: Boolean = false) {
         val gerenciador = getSystemService(LOCATION_SERVICE) as LocationManager
 
         var local: Location? = null
@@ -114,11 +114,11 @@ class FinalizarActivity : Activity() {
         val intent = Intent(this, EspontaneaActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        startActivity(intent)
+        if(!end_task) startActivity(intent)
     }
 
     private fun finalizarPesquisa(nome: String, celular: String) {
-        salvarPesquisa(nome, celular)
+        salvarPesquisa(nome, celular, end_task = true)
         finishAffinity()
     }
 }
