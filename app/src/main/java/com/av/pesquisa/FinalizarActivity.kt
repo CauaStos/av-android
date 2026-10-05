@@ -2,6 +2,7 @@ package com.av.pesquisa
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
@@ -33,9 +34,12 @@ class FinalizarActivity : Activity() {
 
         val botaoConcluir = findViewById<Button>(R.id.botaoConcluir)
         botaoConcluir.setOnClickListener { concluirPesquisa() }
+
+        val botaoFinalizar = findViewById<Button>(R.id.botaoFinalizar)
+        botaoFinalizar.setOnClickListener { concluirPesquisa(end_app = true) }
     }
 
-    private fun concluirPesquisa() {
+    private fun concluirPesquisa(end_app: Boolean = false) {
         val editNome = findViewById<EditText>(R.id.editNome)
         val editCelular = findViewById<EditText>(R.id.editCelular)
         val nome = editNome.text.toString().trim()
@@ -54,7 +58,7 @@ class FinalizarActivity : Activity() {
             PackageManager.PERMISSION_GRANTED
 
         if (permissaoOk) {
-            salvarPesquisa(nome, celular)
+            if (!end_app) salvarPesquisa(nome, celular) else finalizarPesquisa(nome, celular)
         } else {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 100)
         }
@@ -106,6 +110,15 @@ class FinalizarActivity : Activity() {
         } else {
             Toast.makeText(this, "Erro ao salvar a pesquisa", Toast.LENGTH_SHORT).show()
         }
+
+        val intent = Intent(this, EspontaneaActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+    }
+
+    private fun finalizarPesquisa(nome: String, celular: String) {
+        salvarPesquisa(nome, celular)
         finishAffinity()
     }
 }
