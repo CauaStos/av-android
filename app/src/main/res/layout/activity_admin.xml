@@ -38,6 +38,13 @@
             android:text="Pesquisa estimulada"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Percentual de intenções de voto por candidato."
+            android:textSize="13sp"
             android:layout_marginBottom="8dp" />
 
         <LinearLayout
@@ -53,6 +60,13 @@
             android:text="Problemas mais citados"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantidade de entrevistas que apontaram cada problema (3 por entrevista)."
+            android:textSize="13sp"
             android:layout_marginBottom="8dp" />
 
         <LinearLayout
@@ -68,6 +82,13 @@
             android:text="Consultar entrevistados"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome, celular, data e local de cada entrevista registrada."
+            android:textSize="13sp"
             android:layout_marginBottom="8dp" />
 
         <LinearLayout

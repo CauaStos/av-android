@@ -23,6 +23,13 @@
             android:text="Dados do entrevistado"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informe o nome e o celular de quem respondeu à entrevista."
+            android:textSize="13sp"
             android:layout_marginBottom="8dp" />
 
         <EditText
@@ -47,6 +54,13 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confira as respostas coletadas nesta entrevista."
+            android:textSize="13sp"
             android:layout_marginBottom="8dp" />
 
         <TextView
