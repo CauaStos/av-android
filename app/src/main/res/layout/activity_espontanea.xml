@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesquisa espontânea"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Em quem você votaria para prefeito da sua cidade?"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:id="@+id/editResposta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite sua resposta"
+        android:inputType="textMultiLine"
+        android:minLines="2" />
+
+    <Button
+        android:id="@+id/botaoTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Escolher tipo de pesquisa"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:id="@+id/botaoAvancar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Avançar" />
+
+</LinearLayout>
