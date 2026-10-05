@@ -35,7 +35,7 @@ class ProblemasActivity : Activity() {
                 return@setOnClickListener
             }
 
-            val problemas = selecionados.joinToString(",")
+            val problemas = selecionados.joinToString(", ")
 
             val intent = Intent(this, FinalizarActivity::class.java)
             intent.putExtra("espontanea", espontanea)
