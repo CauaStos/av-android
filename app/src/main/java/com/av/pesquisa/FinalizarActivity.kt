@@ -80,11 +80,16 @@ class FinalizarActivity : Activity() {
         val gerenciador = getSystemService(LOCATION_SERVICE) as LocationManager
 
         var local: Location? = null
-        for (provedor in gerenciador.allProviders) {
-            val atual = gerenciador.getLastKnownLocation(provedor)
-            if (atual != null) {
-                local = atual
-                break
+        val permissaoOk = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
+
+        if (permissaoOk) {
+            for (provedor in gerenciador.allProviders) {
+                val atual = gerenciador.getLastKnownLocation(provedor)
+                if (atual != null) {
+                    local = atual
+                    break
+                }
             }
         }
 
