@@ -1,119 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Painel do Admin"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/textoResumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:textSize="15sp"
+        android:layout_marginBottom="16dp" />
 
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="70dp"/>
+    <RadioGroup
+        android:id="@+id/grupoTabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/tabEstimulada"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Painel do Admin"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Estimulada" />
 
-        <TextView
-            android:id="@+id/textoResumo"
+        <RadioButton
+            android:id="@+id/tabProblemas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Problemas" />
+
+        <RadioButton
+            android:id="@+id/tabEntrevistados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Entrevistados" />
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:id="@+id/telaEstimulada"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editBusca"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editBusca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar candidato ou voto"
+                    android:inputType="text"
+                    android:layout_marginBottom="12dp" />
+
+                <LinearLayout
+                    android:id="@+id/caixaCandidatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/telaProblemas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Buscar candidato ou problema"
-            android:inputType="text"
-            android:layout_marginBottom="16dp" />
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pesquisa estimulada"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Percentual de intenções de voto por candidato."
-            android:textSize="13sp"
-            android:layout_marginBottom="8dp" />
+                <LinearLayout
+                    android:id="@+id/caixaProblemas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+        </ScrollView>
 
         <LinearLayout
-            android:id="@+id/caixaCandidatos"
+            android:id="@+id/telaEntrevistados"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginBottom="24dp" />
+            android:visibility="gone">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Problemas mais citados"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome, celular, data e local de cada entrevista."
+                android:textSize="13sp"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quantidade de entrevistas que apontaram cada problema (3 por entrevista)."
-            android:textSize="13sp"
-            android:layout_marginBottom="8dp" />
+            <ListView
+                android:id="@+id/listaEntrevistados"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:id="@+id/caixaProblemas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="24dp" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Consultar entrevistados"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+    </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome, celular, data e local de cada entrevista registrada."
-            android:textSize="13sp"
-            android:layout_marginBottom="8dp" />
+    <Button
+        android:id="@+id/botaoLimpar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Limpar dados da pesquisa" />
 
-        <LinearLayout
-            android:id="@+id/caixaEntrevistados"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="24dp" />
+    <Button
+        android:id="@+id/botaoSair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sair" />
 
-        <Button
-            android:id="@+id/botaoLimpar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Limpar dados da pesquisa" />
-
-        <Button
-            android:id="@+id/botaoSair"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sair" />
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

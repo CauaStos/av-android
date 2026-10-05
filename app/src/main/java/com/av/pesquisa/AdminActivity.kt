@@ -8,10 +8,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.RadioGroup
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 
@@ -23,6 +27,11 @@ class AdminActivity : Activity() {
         "V1 (ULTRAKILL)" to R.drawable.cand_v1,
         "Anakin Skywalker" to R.drawable.cand_anakin,
         "LulaDroid" to R.drawable.cand_luladroid
+    )
+
+    private val opcoesVoto = listOf(
+        "Voto branco" to R.drawable.cand_branco,
+        "Voto nulo" to R.drawable.cand_nulo
     )
 
     private val problemas = listOf(
@@ -71,16 +80,15 @@ class AdminActivity : Activity() {
         })
 
         val caixaCandidatos = findViewById<LinearLayout>(R.id.caixaCandidatos)
-        val caixaProblemas = findViewById<LinearLayout>(R.id.caixaProblemas)
-
-        for ((candidato, foto) in candidatos) {
-            val votos = banco.contarVotos(candidato)
+        for ((opcao, foto) in candidatos + opcoesVoto) {
+            val votos = banco.contarVotos(opcao)
             val porcentagem = if (total > 0) votos * 100 / total else 0
-            val linha = criarBarra(candidato, votos, porcentagem, foto)
+            val linha = criarBarra(opcao, votos, porcentagem, foto)
             caixaCandidatos.addView(linha)
-            linhasBarras.add(candidato to linha)
+            linhasBarras.add(opcao to linha)
         }
 
+        val caixaProblemas = findViewById<LinearLayout>(R.id.caixaProblemas)
         for (problema in problemas) {
             val citacoes = banco.contarProblema(problema)
             val porcentagem = if (total > 0) citacoes * 100 / total else 0
@@ -89,15 +97,20 @@ class AdminActivity : Activity() {
             linhasBarras.add(problema to linha)
         }
 
-        val caixaEntrevistados = findViewById<LinearLayout>(R.id.caixaEntrevistados)
+        configurarTabs()
+
+        val listaEntrevistados = findViewById<ListView>(R.id.listaEntrevistados)
         val entrevistados = banco.listarEntrevistados()
-        if (entrevistados.isEmpty()) {
-            caixaEntrevistados.addView(criarTexto("Nenhuma entrevista registrada"))
+        val linhasLista = if (entrevistados.isEmpty()) {
+            listOf("Nenhuma entrevista registrada")
         } else {
-            for (entrevista in entrevistados) {
-                caixaEntrevistados.addView(criarTexto(entrevista))
-            }
+            entrevistados
         }
+        listaEntrevistados.adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            linhasLista
+        )
 
         val botaoLimpar = findViewById<Button>(R.id.botaoLimpar)
         botaoLimpar.setOnClickListener {
@@ -119,6 +132,22 @@ class AdminActivity : Activity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finishAffinity()
+        }
+    }
+
+    private fun configurarTabs() {
+        val grupoTabs = findViewById<RadioGroup>(R.id.grupoTabs)
+        val telaEstimulada = findViewById<View>(R.id.telaEstimulada)
+        val telaProblemas = findViewById<View>(R.id.telaProblemas)
+        val telaEntrevistados = findViewById<View>(R.id.telaEntrevistados)
+
+        grupoTabs.setOnCheckedChangeListener { _, abaSelecionada ->
+            telaEstimulada.visibility =
+                if (abaSelecionada == R.id.tabEstimulada) View.VISIBLE else View.GONE
+            telaProblemas.visibility =
+                if (abaSelecionada == R.id.tabProblemas) View.VISIBLE else View.GONE
+            telaEntrevistados.visibility =
+                if (abaSelecionada == R.id.tabEntrevistados) View.VISIBLE else View.GONE
         }
     }
 
