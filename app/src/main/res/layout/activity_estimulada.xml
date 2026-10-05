@@ -78,6 +78,24 @@
                 android:padding="8dp"
                 android:text="LulaDroid" />
 
+            <RadioButton
+                android:id="@+id/rbBranco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/cand_branco"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
+                android:text="Voto branco" />
+
+            <RadioButton
+                android:id="@+id/rbNulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/cand_nulo"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
+                android:text="Voto nulo" />
+
         </RadioGroup>
 
         <Button
