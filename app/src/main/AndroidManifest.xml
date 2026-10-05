@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:label="Pesquisa Eleitoral"
+        android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".EspontaneaActivity" android:exported="false" />
+        <activity android:name=".EstimuladaActivity" android:exported="false" />
+        <activity android:name=".ProblemasActivity" android:exported="false" />
+        <activity android:name=".FinalizarActivity" android:exported="false" />
+        <activity android:name=".AdminActivity" android:exported="false" />
+    </application>
+</manifest>
