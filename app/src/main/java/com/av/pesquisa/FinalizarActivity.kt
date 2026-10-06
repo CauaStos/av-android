@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -18,6 +20,8 @@ class FinalizarActivity : Activity() {
     private lateinit var estimulada: String
     private lateinit var problemas: String
 
+    private var atualizandoCelular = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finalizar)
@@ -25,6 +29,22 @@ class FinalizarActivity : Activity() {
         espontanea = intent.getStringExtra("espontanea") ?: ""
         estimulada = intent.getStringExtra("estimulada") ?: ""
         problemas = intent.getStringExtra("problemas") ?: ""
+
+        val editCelular = findViewById<EditText>(R.id.editCelular)
+        editCelular.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(texto: Editable) {
+                if (atualizandoCelular) return
+                atualizandoCelular = true
+                val formatado = formatarCelular(texto.toString())
+                if (texto.toString() != formatado) {
+                    editCelular.setText(formatado)
+                    editCelular.setSelection(formatado.length)
+                }
+                atualizandoCelular = false
+            }
+            override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
+            override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) {}
+        })
 
         val textoResumo = findViewById<TextView>(R.id.textoResumo)
         textoResumo.text =
@@ -78,6 +98,20 @@ class FinalizarActivity : Activity() {
                 editCelular.text.toString().trim()
             )
         }
+    }
+
+    private fun formatarCelular(entrada: String): String {
+        val digitos = entrada.filter { it.isDigit() }.take(11)
+        val posicaoTraco = if (digitos.length > 10) 7 else 6
+        val formatado = StringBuilder()
+        for (i in digitos.indices) {
+            if (i == 0) formatado.append("(")
+            if (i == 2) formatado.append(") ")
+            if (i == posicaoTraco && digitos.length > posicaoTraco) formatado.append("-")
+            formatado.append(digitos[i])
+        }
+        if (digitos.length == 2) formatado.append(") ")
+        return formatado.toString()
     }
 
     private fun salvarPesquisa(nome: String, celular: String, end_task: Boolean = false) {
